@@ -12,6 +12,7 @@ public class Raycaster : MonoBehaviour
    
 
     private static Color currentColor;
+    //This variable is static because its needed by alot of scripts 
     public static Color CurrentColor
     {
         get
@@ -69,6 +70,7 @@ public class Raycaster : MonoBehaviour
                 case "Lines":
                     if (Input.GetMouseButtonDown(0))
                     {
+                        //change color to be the currently selected one
                         LineRenderer l = HitObject.GetComponent<LineRenderer>();
                         l.startColor = Raycaster.CurrentColor;
                         l.endColor = Raycaster.CurrentColor;
@@ -77,6 +79,7 @@ public class Raycaster : MonoBehaviour
             }
         }
     }
+    #region Properties
 
     public bool Hit
     {
@@ -93,4 +96,6 @@ public class Raycaster : MonoBehaviour
 
         get { return rayHit.point; }
     }
+
+    #endregion Properties
 }

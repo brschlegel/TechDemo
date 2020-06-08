@@ -5,6 +5,8 @@ using System.IO;
 
 public class VertexManager : MonoBehaviour
 {
+    //The vertex manager is primarily worried about creating vertices and adding them to the linked list, as well as printing out the vertex positions
+
     // Start is called before the first frame update
     public GameObject vertexPrefab;
     private Raycaster cast;
@@ -12,6 +14,9 @@ public class VertexManager : MonoBehaviour
     public Vertex tail;
     public float height;
 
+    string savePath = "Assets/test.yml";
+
+    //This dictionary is for converting colors to strings for writing
     private Dictionary<Color, string> ColorDict;
 
     public bool creating;
@@ -24,7 +29,7 @@ public class VertexManager : MonoBehaviour
         height = 1;
 
         //clear the file
-        using (StreamWriter writer = new StreamWriter("Assets/test.yml"))
+        using (StreamWriter writer = new StreamWriter(savePath))
         {
             writer.Close();
         }
@@ -41,7 +46,7 @@ public class VertexManager : MonoBehaviour
        
         if(creating && Input.GetMouseButtonDown(0))
         {
-            
+            //Linked list. Not sure if it needs to be doubly linked, but was simple enough to implement so I figured I would   
             Vertex v = Instantiate(vertexPrefab, new Vector3 (cast.HitPoint.x, height, cast.HitPoint.z), Quaternion.identity, transform).GetComponent<Vertex>();
             if (head == null)
             {
@@ -70,9 +75,10 @@ public class VertexManager : MonoBehaviour
     public void WritePoints()
     {
         Vertex current = head;
-        using (StreamWriter writer = new StreamWriter("Assets/test.yml"))
+        using (StreamWriter writer = new StreamWriter(savePath))
         { 
-
+            //loops through linked list, printing associated action to the line the vertex owns, which is the line going out 
+            //ie the last vertex has no line owned
             while (current.OutVertex != null)
             {
                 writer.WriteLine("-" + ColorDict[current.transform.GetChild(0).GetComponent<LineRenderer>().startColor]);
@@ -81,7 +87,7 @@ public class VertexManager : MonoBehaviour
                 writer.WriteLine(" -" + current.transform.position.z);
                 current = current.OutVertex;
             }
-
+            //last vertex
             writer.WriteLine("-End");
             writer.WriteLine(" -" + current.transform.position.x);
             writer.WriteLine(" -" + current.transform.position.y);
