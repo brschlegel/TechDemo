@@ -16,6 +16,8 @@ public class Vertex : MonoBehaviour
     public Vertex inVertex;
     public List<LineRenderer> connections;
     CapsuleCollider capsule;
+    private LogChange logger;
+
     #region Properties
     public bool Selected
     {
@@ -36,6 +38,10 @@ public class Vertex : MonoBehaviour
         set { inVertex = value; }
     }
 
+    public LogChange Logger
+    {
+        set {logger = value;}
+    }
     #endregion
 
     void Start()
@@ -55,7 +61,12 @@ public class Vertex : MonoBehaviour
             l.SetPositions(vertexPositions);
             //creates capsule, the capsule will be morphed to the line in UpdateConnections 
             capsule = l.gameObject.GetComponent<CapsuleCollider>();
+            
+            UpdateConnections();
+            
          }
+         logger();
+
     }
 
     // Update is called once per frame
@@ -63,14 +74,20 @@ public class Vertex : MonoBehaviour
     {
         if(selected)
         {
-            Vector3 point = cast.HitPoint;
+           Move();
+        }
+    }
+
+    public void Move()
+    {
+         Vector3 point = cast.HitPoint;
             transform.position = new Vector3(point.x, height, point.z);
             UpdateConnections();
             if(Input.GetMouseButtonUp(0))
             {
                 selected = false;
+                logger();
             }
-        }
     }
 
     public void UpdateConnections()
