@@ -9,6 +9,7 @@ public class Raycaster : MonoBehaviour
     private Ray mouseRay;
     private RaycastHit rayHit;
     private bool hit;
+
    
 
     private static Color currentColor;
@@ -56,28 +57,8 @@ public class Raycaster : MonoBehaviour
 
         hit = Physics.Raycast(mouseRay, out rayHit, 1000.0f);
        
-        if (hit)
-        {
-            //Handling selection of different objects on screen
-            switch (HitObject.tag)
-            {
-                case "Vertex":
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                       HitObject.GetComponent<Vertex>().selected = true;
-                    }
-                    break;
-                case "Lines":
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        //change color to be the currently selected one
-                        LineRenderer l = HitObject.GetComponent<LineRenderer>();
-                        l.startColor = Raycaster.CurrentColor;
-                        l.endColor = Raycaster.CurrentColor;
-                    }
-                    break;
-            }
-        }
+      
+        
     }
     #region Properties
 
@@ -88,7 +69,12 @@ public class Raycaster : MonoBehaviour
 
     public GameObject HitObject
     {
-        get { return rayHit.transform.gameObject; }
+        get
+        { 
+           
+          return rayHit.transform.gameObject;
+
+        }
     }
 
     public Vector3 HitPoint
