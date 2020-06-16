@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Yaml.unity
     guid: 08959099d621dca48b9466dda16a3ec5
+  - enabled: 1
+    path: Assets/Scenes/DragAndDrop.unity
+    guid: 0cc2837923971184598040a332fedbf7
   m_configObjects: {}

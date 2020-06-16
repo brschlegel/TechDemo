@@ -11,18 +11,18 @@ public class VertexManager : MonoBehaviour
 {
     //The vertex manager is primarily worried about creating and moving vertices as well as adding them to the linked list
 
-    // Start is called before the first frame update
     public GameObject vertexPrefab;
     public GameObject linePrefab;
-
     private Raycaster cast;
+
+    //Linked list stuff
     public Vertex head;
     public Vertex tail;
-    public float height;
     public int count;
+    //height at which the vertices are instantiated
+    public float height;
+  
     public LogChange logger;
-
-    //This dictionary is for converting colors to strings for writing
 
     void Start()
     {
@@ -75,8 +75,8 @@ public class VertexManager : MonoBehaviour
                 //The line is owned by the PREVIOUS vertex, and is parented under it in unity
                 LineRenderer l = Instantiate(linePrefab, v.inVertex.gameObject.transform).GetComponent<LineRenderer>();
                 //Lines are set to take in gradients, so you have to set start and end
-                l.startColor = Raycaster.CurrentColor;
-                l.endColor = Raycaster.CurrentColor;
+                l.startColor = cast.CurrentColor;
+                l.endColor = cast.CurrentColor;
 
                 Vector3[] vertexPositions = { v.inVertex.gameObject.transform.position, v.transform.position };
                 l.SetPositions(vertexPositions);

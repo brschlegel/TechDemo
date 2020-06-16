@@ -5,16 +5,15 @@ using UnityEngine.UI;
 
 public class Raycaster : MonoBehaviour
 {
+    //Raycaster handles all of the raycasting (go figure)
     private Camera cam;
     private Ray mouseRay;
     private RaycastHit rayHit;
     private bool hit;
 
-   
-
-    private static Color currentColor;
-    //This variable is static because its needed by alot of scripts 
-    public static Color CurrentColor
+    private Color currentColor;
+    
+    public Color CurrentColor
     {
         get
         {
@@ -47,18 +46,13 @@ public class Raycaster : MonoBehaviour
     void Start()
     {
         cam = gameObject.GetComponent<Camera>();
-       
     }
 
     // Update is called once per frame
     void Update()
     {
         mouseRay = cam.ScreenPointToRay(Input.mousePosition);
-
-        hit = Physics.Raycast(mouseRay, out rayHit, 1000.0f);
-       
-      
-        
+        hit = Physics.Raycast(mouseRay, out rayHit, 1000.0f);   
     }
     #region Properties
 
@@ -69,17 +63,11 @@ public class Raycaster : MonoBehaviour
 
     public GameObject HitObject
     {
-        get
-        { 
-           
-          return rayHit.transform.gameObject;
-
-        }
+        get { return rayHit.transform.gameObject; }
     }
 
     public Vector3 HitPoint
     {
-
         get { return rayHit.point; }
     }
 

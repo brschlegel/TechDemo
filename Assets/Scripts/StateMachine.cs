@@ -5,13 +5,12 @@ using UnityEngine;
 public enum UIState { Creating, Selecting }
 public class StateMachine : MonoBehaviour
 {
+    //State machine handles all of the input
     public VertexManager vertexManager;
     private Raycaster cast;
     public UIState state;
     public UndoRedo undo;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         state = UIState.Selecting;
@@ -55,8 +54,8 @@ public class StateMachine : MonoBehaviour
                             {
                                 //change color to be the currently selected one
                                 LineRenderer l = cast.HitObject.GetComponent<LineRenderer>();
-                                l.startColor = Raycaster.CurrentColor;
-                                l.endColor = Raycaster.CurrentColor;
+                                l.startColor = cast.CurrentColor;
+                                l.endColor = cast.CurrentColor;
                                 undo.logger();
                             }
                             break;

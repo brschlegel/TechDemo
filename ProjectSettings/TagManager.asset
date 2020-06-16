@@ -9,6 +9,7 @@ TagManager:
   - Lines
   - Vertex
   - Obstacles
+  - Draggable
   layers:
   - Default
   - TransparentFX

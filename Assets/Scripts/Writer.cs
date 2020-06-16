@@ -5,6 +5,7 @@ using System.IO;
 
 public class Writer : MonoBehaviour
 {
+    //Writer takes in the vertices and writes to a YAML file
     string savePath = "Assets/test.yml";
     private VertexManager vm;
 
@@ -21,12 +22,6 @@ public class Writer : MonoBehaviour
         ColorDict.Add(Color.red, "Walk");
         ColorDict.Add(Color.green, "Crawl");
         ColorDict.Add(Color.blue, "Run");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void WritePoints()
